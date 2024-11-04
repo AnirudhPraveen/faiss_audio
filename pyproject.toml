@@ -1,0 +1,99 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "faiss-audio"
+version = "0.1.0"
+description = "A FAISS wrapper library for audio similarity search"
+readme = "README.md"
+authors = [
+    {name = "Anirudh Praveen", email = "anirudhpraveen2000@gmail.com"},
+]
+license = {text = "MIT"}
+requires-python = ">=3.8"  
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "faiss-cpu>=1.7.0",
+    "numpy>=1.22.0",           
+    "torch>=2.0.0",           
+    "torchaudio>=2.0.0",
+    "transformers>=4.30.0",    
+    "tqdm>=4.65.0",
+]
+
+[project.optional-dependencies]
+gpu = [
+    "faiss-gpu>=1.7.0",
+]
+dev = [
+    "pytest>=7.0.0",          
+    "pytest-cov>=4.1.0",      
+    "black>=23.0.0",          
+    "isort>=5.12.0",          
+    "flake8>=6.1.0",          
+    "mypy>=1.5.0",           
+    "ruff>=0.1.0",           
+]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.21.0",  
+    "soundfile>=0.12.0",      
+]
+
+[project.urls]
+Homepage = "https://github.com/AnirudhPraveen/faiss-audio"
+Documentation = "https://faiss-audio.readthedocs.io"
+Repository = "https://github.com/AnirudhPraveen/faiss-audio.git"
+Issues = "https://github.com/AnirudhPraveen/faiss-audio/issues"
+
+[tool.setuptools]
+packages = ["faiss_audio"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --cov=faiss_audio"
+testpaths = [
+    "tests",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']     
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]                   
+python_version = "3.8"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.ruff]                   # Section identifier for Ruff in .toml file
+
+select = ["E", "F", "B"]      # Enables these rule sets:
+                             # "E" - pycodestyle errors (style issues)
+                             # "F" - pyflakes (logical errors)
+                             # "B" - flake8-bugbear (bug detection)
+
+ignore = []                   # Empty list means no rules are ignored
+
+line-length = 88             # Maximum characters per line
+                             # 88 is same as Black formatter default
+
+target-version = "py38"      # Tells Ruff to check compatibility 
+                             # with Python 3.8 and above
