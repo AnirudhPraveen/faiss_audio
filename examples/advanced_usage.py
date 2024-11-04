@@ -3,6 +3,7 @@ import numpy as np
 from pathlib import Path
 from faiss_audio import AudioSearch
 from examples import create_example_dataset
+import time
 
 def compare_index_types():
     """Compare different index types."""
